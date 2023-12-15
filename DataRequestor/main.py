@@ -13,24 +13,26 @@ while (True):
     x = response.text
     y = json.loads(x)
     
-    kraj = y['results'][0]['country']
-    miasto = y['results'][0]['city']
-    czas = str(y['results'][0]['measurements'][0]['lastUpdated'])
+    country = y['results'][0]['country']
+    city = y['results'][0]['city']
+    time = str(y['results'][0]['measurements'][0]['lastUpdated'])
 
-    location={"country":kraj,
-             "city":miasto}
+    location={"country":country,
+             "city":city}
     
     values={}
+    for el in y["results"][0]["measurements"]:
+        values[el["parameter"]]={
+            "value":el["value"],
+            "unit":el["unit"]
+        }
 
     weather={   "location":location,
-                "timestamp":czas,
-                "values":[{<measurement-name>:<value>}]}
+                "timestamp":time,
+                "values":values}
 
-    data_to_send=json.dumps(weather)
+    data_to_send=json.dumps(weather,ensure_ascii=False)
     print(data_to_send)
-
-    for el in y["results"][0]["measurements"]:
-        print(f"{el['parameter']:<5} = {el['value']} {el['unit']}")
 
     sleep(5)
 
