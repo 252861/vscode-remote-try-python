@@ -19,6 +19,7 @@ while (True):
     x = response.text
     y = json.loads(x)
     
+
     country = y['results'][0]['country']
     city = y['results'][0]['city']
     time = str(y['results'][0]['parameters'][0]['lastUpdated'])
