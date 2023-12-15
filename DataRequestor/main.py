@@ -21,15 +21,15 @@ while (True):
     
     country = y['results'][0]['country']
     city = y['results'][0]['city']
-    time = str(y['results'][0]['measurements'][0]['lastUpdated'])
+    time = str(y['results'][0]['parameters'][0]['lastUpdated'])
 
     location={"country":country,
              "city":city}
     
     values={}
-    for el in y["results"][0]["measurements"]:
+    for el in y["results"][0]["parameters"]:
         values[el["parameter"]]={
-            "value":el["value"],
+            "value":el["lastValue"],
             "unit":el["unit"]
         }
 
