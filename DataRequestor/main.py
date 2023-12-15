@@ -2,11 +2,17 @@ from time import sleep
 from datetime import datetime
 #from snap7.server import mainloop
 import json
+import os
 import requests
 
-url = "https://api.openaq.org/v2/latest/9342?limit=100&page=1&offset=0&sort=asc"
+# SAM WROCŁAW ----------------------
+# url = "https://api.openaq.org/v2/latest/9342?limit=100&page=1&offset=0&sort=asc"
+# headers = {"accept": "application/json"}
 
+
+url = "https://api.openaq.org/v2/locations?limit=100&page=1&offset=0&sort=desc&radius=1000&country=PL&order_by=lastUpdated&dump_raw=false"
 headers = {"accept": "application/json"}
+
 
 while (True):
     response = requests.get(url, headers=headers)
