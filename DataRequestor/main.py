@@ -8,7 +8,6 @@ import requests
 
 env_city = os.getenv('CITY')
 
-#url = "https://api.openaq.org/v2/locations?limit=100&page=1&offset=0&sort=desc&radius=1000&country=PL&city=E%C5%82k&order_by=lastUpdated&dump_raw=false"
 url = f"https://api.openaq.org/v2/locations?limit=100&page=1&offset=0&sort=desc&radius=1000&country=PL&city={env_city}&order_by=lastUpdated&dump_raw=false"
 headers = {"accept": "application/json"}
 
