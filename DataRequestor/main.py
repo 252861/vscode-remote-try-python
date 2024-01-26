@@ -28,38 +28,30 @@ class MqttPub:
             if rc == 0:
                 print("Connected to MQTT Broker!")
             else:
-                print("Failed to connect, return code %d\n", rc)
+                print(f"Failed to connect, return code {rc}\n")
 
-        client = mqtt_client.Client(client_id)
-        # client.username_pw_set(username, password)
-        client.on_connect = on_connect
-        client.connect(broker, port)
-        return client
-
-
-    def publish(self,client):
-        msg_count = 1
-        while True:
-            time.sleep(1)
-            msg = f"messages: {msg_count}"
-            result = client.publish(topic, msg)
-            # result: [0, 1]
-            status = result[0]
-            if status == 0:
-                print(f"Send `{msg}` to topic `{topic}`")
-            else:
-                print(f"Failed to send message to topic {topic}")
-            msg_count += 1
-            if msg_count > 5:
-                break
+        self.client = mqtt_client.Client(client_id)
+        self.client.username_pw_set(username, password)
+        self.client.on_connect = on_connect
+        self.client.connect(broker, port)
+        return self.client
 
 
-    def run(self):
-        client = connect_mqtt()
-        client.loop_start()
-        publish(client)
-        client.loop_stop()
+    def publish(self,data_to_send):
 
+        result = self.client.publish(topic, data_to_send)
+        # result: [0, 1]
+        status = result[0]
+        if status == 0:
+            print(f"Send `{data_to_send}` to topic `{topic}`")
+        else:
+            print(f"Failed to send message to topic {topic}")
+
+     
+
+mymmqttpublish = MqttPub()
+mymmqttpublish.connect_mqtt()
+      
 
 while (True):
     
@@ -76,22 +68,25 @@ while (True):
             "city":city}
     
     values={}
-    for el in y["results"][0]["parameters"]:
-        values[el["parameter"]]={
-            "value":el["lastValue"],
-            "unit":el["unit"]
-        }
+    # for el in y["results"][0]["parameters"]:
+    #     values[el["parameter"]]={
+    #         "value":el["lastValue"],
+    #         "unit":el["unit"]
+    #     }
 
-    weather={   "location":location,
+    for el in y["results"][0]["parameters"]:
+        values[el["parameter"]]=el["lastValue"]
+
+    weather={   "location":location["city"],
                 "timestamp":time,
                 "values":values}
 
     data_to_send=json.dumps(weather,ensure_ascii=False)
     print(data_to_send)
 
-    MqttPub.run()
+    mymmqttpublish.publish(data_to_send)
     sleep(5)
 
 
-
+# do poprawy czas w "weather": ostanie laby 26.01.2024 reszta względnie git
 
