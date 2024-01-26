@@ -26,7 +26,11 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "justMyCode": true
+            "justMyCode": true,
+            "env": {
+                "IP":"46.101.199.108",
+                "CITY":"Wrocław"
+            }
         },
         {
             "name": "Python: Flask",

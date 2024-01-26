@@ -10,4 +10,4 @@ services:
       - CITY=Wrocław
       - USER=student
       - PASS=sys-wbud
-      - IP=46.101.108.102
+      - IP=46.101.199.108
