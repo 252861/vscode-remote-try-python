@@ -5,13 +5,13 @@ import json
 import os
 import requests
 import time
-from mqttps import *
+from mqttsp import *
 
 url = f"https://api.openaq.org/v2/locations?limit=100&page=1&offset=0&sort=desc&radius=1000&country=PL&city={os.getenv('CITY')}&order_by=lastUpdated&dump_raw=false"
 values={}
 
-mqttps = mqttps(str(os.getenv('IP')), str("252861/"+str(os.getenv('CITY'))), str(os.getenv('USER')), str(os.getenv('PASS')))
-mqttps.connect_mqtt()
+mqttsp = mqttsp(str(os.getenv('IP')), str("252861/"+str(os.getenv('CITY'))), str(os.getenv('USER')), str(os.getenv('PASS')))
+mqttsp.connect_mqtt()
       
 while (True):
     
@@ -33,5 +33,5 @@ while (True):
     data_to_send=json.dumps(weather,ensure_ascii=False)
     print(data_to_send)
 
-    mqttps.publish(data_to_send)
+    mqttsp.publish(data_to_send)
     sleep(5)

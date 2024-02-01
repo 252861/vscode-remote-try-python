@@ -10,4 +10,5 @@ services:
       - CITY=Wrocław
       - USER=student
       - PASS=sys-wbud
-      - IP=46.101.199.108
+      #- IP=46.101.199.108
+      - IP=broker.emqx.io

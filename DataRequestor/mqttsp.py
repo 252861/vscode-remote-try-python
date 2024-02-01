@@ -3,7 +3,7 @@ import time
 import os
 from paho.mqtt import client as mqtt_client
 
-class mqttps:
+class mqttsp:
     def __init__(self, ip, city, user, passwd):
         self.ip = ip
         self.city = city
