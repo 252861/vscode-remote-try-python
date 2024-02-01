@@ -3,7 +3,7 @@ from flask import *
 import json
 from jinja2 import Template
 
-app = Flask(name)
+app = Flask(__name__)
 @app.route("/") 
 
 def hello_world(): 
