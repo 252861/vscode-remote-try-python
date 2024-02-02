@@ -41,10 +41,10 @@ class mqttsp:
     def subscribe(self):
         def on_message(client, userdata, msg):
             print(msg.payload.decode())
-            name = str(msg.topic)
-            name = name.replace("/","-")
+            name = str(msg.topic).replace("/","-")
             path = os.path.join("Data", name)                
             with open(path, 'w') as file: 
-                file.write(msg.payload.decode())  
-        self.client.subscribe(self.topic)
+                file.write(msg.payload.decode())
+                  
+        self.client.subscribe(self.topic) # topic='#'
         self.client.on_message = on_message

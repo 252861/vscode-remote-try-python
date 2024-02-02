@@ -34,12 +34,12 @@
     {% for data in data_list %}
     <h1>{{data.location}}</h1>
     <ul>
-        <li>Location: {{ data.location }}</li>
-        <li>Timestamp: {{ data.timestamp }}</li>
-        <li>Values:
+        <li>Lokalizacja: {{ data.location }}</li>
+        <li>Data: {{ data.timestamp }}</li>
+        <li>Odczyty:
             <ul>
-                {% for key, value in data["values"].items() %}
-                    <li>{{ key }}:{{ value }}</li>
+                {% for x, value in data["values"].items() %}
+                    <li>{{ x }}: {{ value }}</li>
                 {% endfor %}
             </ul>
         </li>
