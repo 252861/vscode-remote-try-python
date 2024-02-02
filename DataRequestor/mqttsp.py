@@ -46,5 +46,5 @@ class mqttsp:
             with open(path, 'w') as file: 
                 file.write(msg.payload.decode())
                   
-        self.client.subscribe(topic='#') # topic='#'   # self.topic
+        self.client.subscribe(topic='#') # topic='#'   # self.topic 
         self.client.on_message = on_message
