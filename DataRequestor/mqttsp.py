@@ -42,7 +42,7 @@ class mqttsp:
         def on_message(client, userdata, msg):
             print(msg.payload.decode())
             name = str(msg.topic).replace("/","-")
-            path = os.path.join("Data", name)                
+            path = os.path.join("files", name)                
             with open(path, 'w') as file: 
                 file.write(msg.payload.decode())
                   

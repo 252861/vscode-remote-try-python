@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
+<head style="text-align: center;">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>app</title>
     <style>
         body {
+            text-align: left;
             font-family: system-ui;
             margin: 20px;
         }
 
         h1 {
+            text-align: center;
             color: #186fa1;
             border-bottom: 2px solid #186fa1;
             padding-bottom: 5px;
@@ -25,25 +27,33 @@
             margin-bottom: 10px;
         }
 
-        strong {
+        .highlight {
+            font-weight: bold;
+            color: #186fa1;
+        }
+
+        .bb {
             font-weight: bold;
         }
     </style>
 </head>
-<body>
-    {% for data in data_list %}
-    <h1>{{data.location}}</h1>
-    <ul>
-        <li>Lokalizacja: {{ data.location }}</li>
-        <li>Data: {{ data.timestamp }}</li>
-        <li>Odczyty:
-            <ul>
-                {% for x, value in data["values"].items() %}
-                    <li>{{ x }}: {{ value }}</li>
-                {% endfor %}
-            </ul>
-        </li>
-    </ul>
-    {% endfor %}
+<body style="display: flex; justify-content: center;">
+    <div style="border: 2px solid #186fa1; border-radius: 10px; width: fit-content; padding: 10px;">
+        {% for data in data_list %}
+        <h1>{{data.location}}</h1>
+        <ul>
+            <li><span class="highlight">Lokalizacja:</span> {{ data.location }}</li>
+            <li><span class="highlight">Data:</span> {{ data.timestamp }}</li>
+            <li><span class="highlight">Odczyty:</span>
+                <ul>
+                    {% for x, y in data["values"].items() %}
+                        <ul><span class="bb" style="margin-left: 30px;">{{ x }}</span>: {{ y }}</ul>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
 </body>
+
 </html>
